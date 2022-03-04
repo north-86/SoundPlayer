@@ -100,5 +100,8 @@
   <ItemGroup>
     <Resource Include="key.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="soundp.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
