@@ -21,5 +21,12 @@ namespace SoundPlayer
         {
             InitializeComponent();
         }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            About about = new About();
+            about.Owner = this;
+            about.ShowDialog();
+        }
     }
 }
