@@ -26,7 +26,7 @@ namespace SoundPlayer
         {
             Playback playback = new Playback();
             playback.Owner = this;
-            playback.ShowDialog();
+            playback.Show();
         }
 
         private void About_Click(object sender, RoutedEventArgs e)
