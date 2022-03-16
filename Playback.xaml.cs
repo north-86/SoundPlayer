@@ -14,14 +14,21 @@ using System.Windows.Shapes;
 
 namespace SoundPlayer
 {
-    /// <summary>
-    /// Interaction logic for Playback.xaml
-    /// </summary>
     public partial class Playback : Window
     {
         public Playback()
         {
             InitializeComponent();
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

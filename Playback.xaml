@@ -5,7 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoundPlayer"
         mc:Ignorable="d"
-        Title="Playback" Height="450" Width="800" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Topmost="True" Background="#1F1F1F">
+        Title="Playback" Height="450" Width="800" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" AllowsTransparency="False" WindowStyle="None" Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Window.Resources>
+        <Style x:Key="titleStyle">
+            <Setter Property="ItemsControl.FontSize" Value="15"/>
+            <Setter Property="ItemsControl.Foreground" Value="#FB7D00"/>
+            <Setter Property="ItemsControl.HorizontalAlignment" Value="Center"/>
+            <Setter Property="ItemsControl.VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="btnWindow">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Margin="5">
+                            <Ellipse Width="15" Height="15" Fill="#FB7D00"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Window.Template>
+        <ControlTemplate TargetType="Window">
+            <Border Name="border" Background="#1F1F1F">
+                <Grid x:Name="grid1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" x:Name="grid2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{TemplateBinding Title}" Style="{StaticResource titleStyle}"/>
+                        <Button Grid.Column="1" Click="Close_Click" ToolTip="Close" Style="{StaticResource btnWindow}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </Window.Template>
     <Grid>
         
     </Grid>
