@@ -28,7 +28,7 @@
     </Window.Resources>
     <Window.Template>
         <ControlTemplate TargetType="Window">
-            <Border Name="border" Background="#1F1F1F">
+            <Border Name="borderPlayback" Background="#1F1F1F">
                 <Grid x:Name="grid1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
