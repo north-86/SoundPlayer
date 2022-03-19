@@ -30,5 +30,30 @@ namespace SoundPlayer
         {
             this.Close();
         }
+
+        private void Previous_Click(object sender, RoutedEventArgs e)
+        {
+            //
+        }
+
+        private void Play_Click(object sender, RoutedEventArgs e)
+        {
+            //
+        }
+
+        private void Pause_Click(object sender, RoutedEventArgs e)
+        {
+            //
+        }
+
+        private void Stop_Click(object sender, RoutedEventArgs e)
+        {
+            //
+        }
+
+        private void Next_Click(object sender, RoutedEventArgs e)
+        {
+            //
+        }
     }
 }
