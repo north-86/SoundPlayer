@@ -26,7 +26,7 @@
     </Window.Resources>
     <Window.Template>
         <ControlTemplate TargetType="Window">
-            <Border x:Name="borderAbout" Background="#1F1F1F">
+            <Border x:Name="borderAbout" Background="#1F1F1F" BorderBrush="Black" BorderThickness="1">
                 <Grid x:Name="gridAbout1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>

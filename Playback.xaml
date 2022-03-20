@@ -25,21 +25,85 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style TargetType="{x:Type Button}" x:Key="btnPlayback">
+        <Style TargetType="{x:Type Button}" x:Key="btnPrevious">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border BorderBrush="#FB7D00" BorderThickness="1" Margin="4">
-                            
+                        <Border BorderBrush="#FB7D00" BorderThickness="1" CornerRadius="10">
+                            <Grid>
+                                <Rectangle Fill="Black" RadiusX="10" RadiusY="10"/>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Text="Previous" Foreground="#FB7D00"/>
+                            </Grid>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="ItemsControl.Margin" Value="5, 5, 5, 5"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="btnPlay">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderBrush="#FB7D00" BorderThickness="1" CornerRadius="10">
+                            <Grid>
+                                <Rectangle Fill="Black" RadiusX="10" RadiusY="10"/>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Text="Play" Foreground="#FB7D00"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsControl.Margin" Value="5, 5, 5, 5"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="btnPause">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderBrush="#FB7D00" BorderThickness="1" CornerRadius="10">
+                            <Grid>
+                                <Rectangle Fill="Black" RadiusX="10" RadiusY="10"/>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Text="Pause" Foreground="#FB7D00"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsControl.Margin" Value="5, 5, 5, 5"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="btnStop">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderBrush="#FB7D00" BorderThickness="1" CornerRadius="10">
+                            <Grid>
+                                <Rectangle Fill="Black" RadiusX="10" RadiusY="10"/>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Text="Stop" Foreground="#FB7D00"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsControl.Margin" Value="5, 5, 5, 5"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="btnNext">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderBrush="#FB7D00" BorderThickness="1" CornerRadius="10">
+                            <Grid>
+                                <Rectangle Fill="Black" RadiusX="10" RadiusY="10"/>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Text="Next" Foreground="#FB7D00"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsControl.Margin" Value="5, 5, 5, 5"/>
         </Style>
     </Window.Resources>
     <Window.Template>
         <ControlTemplate TargetType="Window">
-            <Border Name="borderPlayback" Background="#1F1F1F">
+            <Border Name="borderPlayback" Background="#1F1F1F" BorderBrush="Black" BorderThickness="1">
                 <Grid x:Name="grid1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -65,11 +129,11 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="previous" Grid.Row="0" Grid.Column="0" Style="{StaticResource btnPlayback}" Click="Previous_Click"/>
-                        <Button x:Name="play" Grid.Row="0" Grid.Column="1" Style="{StaticResource btnPlayback}" Click="Play_Click"/>
-                        <Button x:Name="pause" Grid.Row="0" Grid.Column="2" Style="{StaticResource btnPlayback}" Click="Pause_Click"/>
-                        <Button x:Name="stop" Grid.Row="0" Grid.Column="3" Style="{StaticResource btnPlayback}" Click="Stop_Click"/>
-                        <Button x:Name="next" Grid.Row="0" Grid.Column="4" Style="{StaticResource btnPlayback}" Click="Next_Click"/>
+                        <Button x:Name="previous" Grid.Row="0" Grid.Column="0" Style="{StaticResource btnPrevious}" Click="Previous_Click"/>
+                        <Button x:Name="play" Grid.Row="0" Grid.Column="1" Style="{StaticResource btnPlay}" Click="Play_Click"/>
+                        <Button x:Name="pause" Grid.Row="0" Grid.Column="2" Style="{StaticResource btnPause}" Click="Pause_Click"/>
+                        <Button x:Name="stop" Grid.Row="0" Grid.Column="3" Style="{StaticResource btnStop}" Click="Stop_Click"/>
+                        <Button x:Name="next" Grid.Row="0" Grid.Column="4" Style="{StaticResource btnNext}" Click="Next_Click"/>
                     </Grid>
                 </Grid>
             </Border>

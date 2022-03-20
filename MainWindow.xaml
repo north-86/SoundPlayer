@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoundPlayer"
         mc:Ignorable="d"
-        Title="SoundPlayer" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip">
+        Title="SoundPlayer" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" BorderBrush="Black" BorderThickness="1">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="ItemsControl.Foreground" Value="#FB7D00"/>
