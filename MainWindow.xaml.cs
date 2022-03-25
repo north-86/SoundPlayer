@@ -35,5 +35,10 @@ namespace SoundPlayer
             about.Owner = this;
             about.ShowDialog();
         }
+
+        private void AddFile_Click(object sender, RoutedEventArgs e)
+        {
+            //
+        }
     }
 }
