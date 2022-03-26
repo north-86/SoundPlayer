@@ -5,45 +5,111 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoundPlayer"
         mc:Ignorable="d"
-        Title="SoundPlayer" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" BorderBrush="Black" BorderThickness="1">
+        Title="SoundPlayer" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" AllowsTransparency="False" WindowStyle="None" Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Window.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="btnMinWindow">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Margin="5 5 5 10">
+                            <Rectangle Width="25" Height="1" Fill="#FB7D00"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsControl.VerticalAlignment" Value="Bottom"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="btnMaxWindow">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Margin="5">
+                            <Rectangle Width="25" Height="25" Stroke="#FB7D00" Fill="Transparent"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="btnCloseWindow">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Margin="5">
+                            <Ellipse Width="25" Height="25" Fill="#FB7D00"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style TargetType="Button">
             <Setter Property="ItemsControl.Foreground" Value="#FB7D00"/>
             <Setter Property="ItemsControl.Background" Value="#1F1F1F"/>
             <Setter Property="ItemsControl.HorizontalContentAlignment" Value="Center"/>
             <Setter Property="ItemsControl.VerticalContentAlignment" Value="Center"/>
+            <Setter Property="ItemsControl.BorderBrush" Value="Black"/>
+            <Setter Property="ItemsControl.BorderThickness" Value="1"/>
         </Style>
     </Window.Resources>
-    <Grid x:Name="gridTotal" Background="#1F1F1F">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
-        </Grid.RowDefinitions>
-        <Border x:Name="borderMain" Grid.Row="0" BorderBrush="Black" BorderThickness="1">
-            <Grid x:Name="grid1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Row="0" Grid.Column="0" MinWidth="60" MinHeight="60" Content="+" FontSize="30" ToolTip="Add file" Click="AddFile_Click"/>
-            </Grid>
-        </Border>
-        <Grid x:Name="grid2" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <GridSplitter Grid.Row="1" Grid.Column="1" Width="2" Background="#FB7D00"/>
-        </Grid>
-        <Grid x:Name="grid3" Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*"/>
-                <ColumnDefinition Width="0.5*"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="btnPlayback" Content="Playback" Click="Playback_Click"/>
-            <Button Grid.Column="1" x:Name="btnAbout" Content="About" Click="About_Click"/>
-        </Grid>
-    </Grid>
+    <Window.Template>
+        <ControlTemplate TargetType="Window">
+            <Border Name="borderWindow" Background="#1F1F1F" BorderBrush="Black" BorderThickness="1">
+                <Grid x:Name="gridWindow"> 
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="grid0" Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Width="30" Height="30" Margin="5">
+                            <Image.Source>
+                                key.ico
+                            </Image.Source>
+                        </Image>
+                        <TextBlock Grid.Column="1" Text="{TemplateBinding Title}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0" FontSize="20" Foreground="#FB7D00"/>
+                        <Button x:Name="btnMin" Grid.Column="2" ToolTip="Minimize" Style="{StaticResource btnMinWindow}" Click="BtnMin_Click"/>
+                        <Button x:Name="btnMax" Grid.Column="3" ToolTip="Maximize/Restore Down" Style="{StaticResource btnMaxWindow}" Click="BtnMax_Click"/>
+                        <Button x:Name="btnClose" Grid.Column="4" ToolTip="Close" Style="{StaticResource btnCloseWindow}" Click="BtnClose_Click"/>
+                    </Grid>
+                    <Grid x:Name="gridTotal" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Border x:Name="borderMain" Grid.Row="0" BorderBrush="Black" BorderThickness="1">
+                            <Grid x:Name="grid1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Row="0" Grid.Column="0" MinWidth="60" MinHeight="60" Content="+" FontSize="30" ToolTip="Add file" Click="AddFile_Click"/>
+                            </Grid>
+                        </Border>
+                        <Grid x:Name="grid2" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <GridSplitter Grid.Row="1" Grid.Column="1" Width="2" Background="#FB7D00"/>
+                        </Grid>
+                        <Grid x:Name="grid3" Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" x:Name="btnPlayback" Content="Playback" Click="Playback_Click"/>
+                            <Button Grid.Column="1" x:Name="btnAbout" Content="About" Click="About_Click"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </Window.Template>
 </Window>

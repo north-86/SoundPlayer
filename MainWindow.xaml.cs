@@ -40,5 +40,25 @@ namespace SoundPlayer
         {
             //
         }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void BtnMin_Click(object sender, RoutedEventArgs e)
+        {
+            //
+        }
+
+        private void BtnMax_Click(object sender, RoutedEventArgs e)
+        {
+            //
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
