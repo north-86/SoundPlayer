@@ -103,13 +103,13 @@
     </Window.Resources>
     <Window.Template>
         <ControlTemplate TargetType="Window">
-            <Border Name="borderPlayback" Background="#1F1F1F" BorderBrush="Black" BorderThickness="1">
-                <Grid x:Name="grid1">
+            <Border Background="#1F1F1F" BorderBrush="Black" BorderThickness="1">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" x:Name="grid2">
+                    <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
@@ -117,26 +117,29 @@
                         <TextBlock Grid.Column="0" Text="{TemplateBinding Title}" Style="{StaticResource titleStyle}"/>
                         <Button Grid.Column="1" Click="Close_Click" ToolTip="Close" Style="{StaticResource btnWindow}"/>
                     </Grid>
-                    <Grid x:Name="grid3" Grid.Row="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Button x:Name="previous" Grid.Row="0" Grid.Column="0" Style="{StaticResource btnPrevious}" Click="Previous_Click"/>
-                        <Button x:Name="play" Grid.Row="0" Grid.Column="1" Style="{StaticResource btnPlay}" Click="Play_Click"/>
-                        <Button x:Name="pause" Grid.Row="0" Grid.Column="2" Style="{StaticResource btnPause}" Click="Pause_Click"/>
-                        <Button x:Name="stop" Grid.Row="0" Grid.Column="3" Style="{StaticResource btnStop}" Click="Stop_Click"/>
-                        <Button x:Name="next" Grid.Row="0" Grid.Column="4" Style="{StaticResource btnNext}" Click="Next_Click"/>
-                    </Grid>
+                    <Border Grid.Row="1">
+                        <ContentPresenter/>
+                    </Border>
                 </Grid>
             </Border>
         </ControlTemplate>
     </Window.Template>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="previous" Grid.Row="0" Grid.Column="0" Style="{StaticResource btnPrevious}" Click="Previous_Click"/>
+        <Button x:Name="play" Grid.Row="0" Grid.Column="1" Style="{StaticResource btnPlay}" Click="Play_Click"/>
+        <Button x:Name="pause" Grid.Row="0" Grid.Column="2" Style="{StaticResource btnPause}" Click="Pause_Click"/>
+        <Button x:Name="stop" Grid.Row="0" Grid.Column="3" Style="{StaticResource btnStop}" Click="Stop_Click"/>
+        <Button x:Name="next" Grid.Row="0" Grid.Column="4" Style="{StaticResource btnNext}" Click="Next_Click"/>
+    </Grid>
 </Window>
