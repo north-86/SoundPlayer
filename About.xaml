@@ -26,16 +26,13 @@
     </Window.Resources>
     <Window.Template>
         <ControlTemplate TargetType="Window">
-            <Border x:Name="borderAbout" Background="#1F1F1F" BorderBrush="Black" BorderThickness="1">
-                <Grid x:Name="gridAbout1">
+            <Border Background="#1F1F1F" BorderBrush="Black" BorderThickness="1">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
-                    <Grid x:Name="gridAbout2" Grid.Row="0">
+                    <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
@@ -49,12 +46,23 @@
                         <TextBlock Grid.Column="1" Text="{TemplateBinding Title}" HorizontalAlignment="Left" Margin="5 0 0 0" FontSize="15"/>
                         <Button Grid.Column="2" ToolTip="Close" Style="{StaticResource btnAboutWindow}" Click="CloseAbout_Click"/>
                     </Grid>
-                    <TextBlock Grid.Row="1" Text="SoundPlayer" FontSize="30" Margin="0 10 0 0"/>
-                    <TextBlock Grid.Row="2" Text="This application allows you to play mp3 files" FontSize="15"/>
-                    <TextBlock Grid.Row="3" Text="2022 Aliaksandr Prystauka" FontSize="11"/>
-                    <TextBlock Grid.Row="4" Text="GNU General Public License v3.0" FontSize="11"/>
+                    <Border Grid.Row="1">
+                        <ContentPresenter/>
+                    </Border>
                 </Grid>
             </Border>
         </ControlTemplate>
     </Window.Template>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="SoundPlayer" FontSize="30" Margin="0 10 0 0"/>
+        <TextBlock Grid.Row="1" Text="This application allows you to play mp3 files" FontSize="15"/>
+        <TextBlock Grid.Row="2" Text="2022 Aliaksandr Prystauka" FontSize="11"/>
+        <TextBlock Grid.Row="3" Text="GNU General Public License v3.0" FontSize="11"/>
+    </Grid>
 </Window>
