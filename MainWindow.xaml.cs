@@ -21,7 +21,7 @@ namespace SoundPlayer
         {
             InitializeComponent();
         }
-
+        
         private void Playback_Click(object sender, RoutedEventArgs e)
         {
             Playback playback = new Playback();
