@@ -141,5 +141,6 @@
         <Button x:Name="pause" Grid.Row="0" Grid.Column="2" Style="{StaticResource btnPause}" Click="Pause_Click"/>
         <Button x:Name="stop" Grid.Row="0" Grid.Column="3" Style="{StaticResource btnStop}" Click="Stop_Click"/>
         <Button x:Name="next" Grid.Row="0" Grid.Column="4" Style="{StaticResource btnNext}" Click="Next_Click"/>
+        <MediaElement x:Name="mediaElement" Grid.Row="1" Grid.ColumnSpan="5"></MediaElement>
     </Grid>
 </Window>
