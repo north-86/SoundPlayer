@@ -18,9 +18,14 @@ namespace SoundPlayer
 {
     public partial class MainWindow : Window
     {
+        ObservableCollection<SoundFile> soundfiles;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            soundfiles = new ObservableCollection<SoundFile>();
+            listBox.ItemsSource = soundfiles; 
         }
         
         private void Playback_Click(object sender, RoutedEventArgs e)

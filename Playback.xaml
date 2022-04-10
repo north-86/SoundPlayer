@@ -127,7 +127,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -141,6 +143,10 @@
         <Button x:Name="pause" Grid.Row="0" Grid.Column="2" Style="{StaticResource btnPause}" Click="Pause_Click"/>
         <Button x:Name="stop" Grid.Row="0" Grid.Column="3" Style="{StaticResource btnStop}" Click="Stop_Click"/>
         <Button x:Name="next" Grid.Row="0" Grid.Column="4" Style="{StaticResource btnNext}" Click="Next_Click"/>
-        <MediaElement x:Name="mediaElement" Grid.Row="1" Grid.ColumnSpan="5"></MediaElement>
+        <MediaElement x:Name="mediaElement" Grid.Row="1" Grid.ColumnSpan="5" LoadedBehavior="Manual"/>
+        <TextBlock x:Name="tbPosition" Grid.Row="2" Grid.Column="0" Text="Position"/>
+        <Slider x:Name="sliderPosition" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4"/>
+        <TextBlock x:Name="tbVolume" Grid.Row="3" Grid.Column="0" Text="Volume"/>
+        <Slider x:Name="sliderVolume" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4"/>
     </Grid>
 </Window>
