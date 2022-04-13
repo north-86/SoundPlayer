@@ -39,22 +39,45 @@ namespace SoundPlayer
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
-            //
+            mediaElement.Play();
         }
 
         private void Pause_Click(object sender, RoutedEventArgs e)
         {
-            //
+            if (mediaElement.CanPause)
+            {
+                mediaElement.Pause();
+            }
         }
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
-            //
+            mediaElement?.Stop();
         }
 
         private void Next_Click(object sender, RoutedEventArgs e)
         {
             //
+        }
+
+        private void Window_Unloaded(object sender, RoutedEventArgs e)
+        {
+            mediaElement.Close();
+        }
+
+        private void mediaElement_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            //
+        }
+
+        private void mediaElement_MediaFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+            tbState.Text = "Playback error";
+        }
+
+        private void mediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            tbState.Text = "Playback is complete";
         }
     }
 }
