@@ -5,13 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoundPlayer"
         mc:Ignorable="d"
-        Title="Playback" Height="175" Width="250" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" AllowsTransparency="False" WindowStyle="None" Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        Title="Playback" Height="175" Width="250" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" AllowsTransparency="False" WindowStyle="None" Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown" Unloaded="Window_Unloaded">
     <Window.Resources>
         <Style x:Key="titleStyle">
             <Setter Property="ItemsControl.FontSize" Value="15"/>
             <Setter Property="ItemsControl.Foreground" Value="#FB7D00"/>
             <Setter Property="ItemsControl.HorizontalAlignment" Value="Left"/>
             <Setter Property="ItemsControl.VerticalAlignment" Value="Center"/>
+            <Setter Property="ItemsControl.Margin" Value="5, 0, 0, 0"/>
+        </Style>
+        <Style x:Key="tbStyle">
+            <Setter Property="ItemsControl.Foreground" Value="#FB7D00"/>
+            <Setter Property="ItemsControl.HorizontalAlignment" Value="Left"/>
+            <Setter Property="ItemsControl.VerticalAlignment" Value="Center"/>
+            <Setter Property="ItemsControl.FontSize" Value="11"/>
             <Setter Property="ItemsControl.Margin" Value="5, 0, 0, 0"/>
         </Style>
         <Style TargetType="{x:Type Button}" x:Key="btnWindow">
@@ -100,6 +107,9 @@
             </Setter>
             <Setter Property="ItemsControl.Margin" Value="5, 5, 5, 5"/>
         </Style>
+        <Style TargetType="Slider">
+            
+        </Style>
     </Window.Resources>
     <Window.Template>
         <ControlTemplate TargetType="Window">
@@ -130,6 +140,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -143,10 +154,11 @@
         <Button x:Name="pause" Grid.Row="0" Grid.Column="2" Style="{StaticResource btnPause}" Click="Pause_Click"/>
         <Button x:Name="stop" Grid.Row="0" Grid.Column="3" Style="{StaticResource btnStop}" Click="Stop_Click"/>
         <Button x:Name="next" Grid.Row="0" Grid.Column="4" Style="{StaticResource btnNext}" Click="Next_Click"/>
-        <MediaElement x:Name="mediaElement" Grid.Row="1" Grid.ColumnSpan="5" LoadedBehavior="Manual"/>
-        <TextBlock x:Name="tbPosition" Grid.Row="2" Grid.Column="0" Text="Position"/>
-        <Slider x:Name="sliderPosition" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4"/>
-        <TextBlock x:Name="tbVolume" Grid.Row="3" Grid.Column="0" Text="Volume"/>
-        <Slider x:Name="sliderVolume" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4"/>
+        <TextBlock x:Name="tbState" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource tbStyle}"/>
+        <MediaElement x:Name="mediaElement" Grid.Row="2" Grid.ColumnSpan="5" LoadedBehavior="Manual" MediaOpened="mediaElement_MediaOpened" MediaFailed="mediaElement_MediaFailed" MediaEnded="mediaElement_MediaEnded"/>
+        <TextBlock x:Name="tbPosition" Grid.Row="3" Grid.Column="0" Text="Position" Style="{StaticResource tbStyle}"/>
+        <Slider x:Name="sliderPosition" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4"/>
+        <TextBlock x:Name="tbVolume" Grid.Row="4" Grid.Column="0" Text="Volume" Style="{StaticResource tbStyle}"/>
+        <Slider x:Name="sliderVolume" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4"/>
     </Grid>
 </Window>
