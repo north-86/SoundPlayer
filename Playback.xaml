@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoundPlayer"
         mc:Ignorable="d"
-        Title="Playback" Height="175" Width="250" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" AllowsTransparency="False" WindowStyle="None" Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown" Unloaded="Window_Unloaded">
+        Title="Playback" Height="155" Width="250" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" AllowsTransparency="False" WindowStyle="None" Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown" Unloaded="Window_Unloaded">
     <Window.Resources>
         <Style x:Key="titleStyle">
             <Setter Property="ItemsControl.FontSize" Value="15"/>
@@ -19,7 +19,7 @@
             <Setter Property="ItemsControl.HorizontalAlignment" Value="Left"/>
             <Setter Property="ItemsControl.VerticalAlignment" Value="Center"/>
             <Setter Property="ItemsControl.FontSize" Value="11"/>
-            <Setter Property="ItemsControl.Margin" Value="5, 0, 0, 0"/>
+            <Setter Property="ItemsControl.Margin" Value="5, 2, 0, 2"/>
         </Style>
         <Style TargetType="{x:Type Button}" x:Key="btnWindow">
             <Setter Property="Template">
@@ -108,7 +108,12 @@
             <Setter Property="ItemsControl.Margin" Value="5, 5, 5, 5"/>
         </Style>
         <Style TargetType="Slider">
-            
+            <Setter Property="TickPlacement" Value="BottomRight"/>
+            <Setter Property="IsSelectionRangeEnabled" Value="True"/>
+            <Setter Property="SelectionStart" Value="0"/>
+            <Setter Property="Foreground" Value="#FB7D00"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Minimum" Value="0"/>
         </Style>
     </Window.Resources>
     <Window.Template>
@@ -155,10 +160,20 @@
         <Button x:Name="stop" Grid.Row="0" Grid.Column="3" Style="{StaticResource btnStop}" Click="Stop_Click"/>
         <Button x:Name="next" Grid.Row="0" Grid.Column="4" Style="{StaticResource btnNext}" Click="Next_Click"/>
         <TextBlock x:Name="tbState" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource tbStyle}"/>
-        <MediaElement x:Name="mediaElement" Grid.Row="2" Grid.ColumnSpan="5" LoadedBehavior="Manual" MediaOpened="mediaElement_MediaOpened" MediaFailed="mediaElement_MediaFailed" MediaEnded="mediaElement_MediaEnded"/>
+        <MediaElement x:Name="mediaElement" Grid.Row="2" Grid.ColumnSpan="5" MediaOpened="MediaElement_MediaOpened" MediaFailed="MediaElement_MediaFailed" MediaEnded="MediaElement_MediaEnded"/>
         <TextBlock x:Name="tbPosition" Grid.Row="3" Grid.Column="0" Text="Position" Style="{StaticResource tbStyle}"/>
-        <Slider x:Name="sliderPosition" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4"/>
+        <Slider x:Name="sliderPosition" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" ValueChanged="SliderPosition_ValueChanged">
+            <Slider.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FB7D00" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlDarkDarkBrushKey}" Color="Black" />
+            </Slider.Resources>
+        </Slider>
         <TextBlock x:Name="tbVolume" Grid.Row="4" Grid.Column="0" Text="Volume" Style="{StaticResource tbStyle}"/>
-        <Slider x:Name="sliderVolume" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4"/>
+        <Slider x:Name="sliderVolume" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" ValueChanged="SliderVolume_ValueChanged" Value="{Binding ElementName=mediaElement, Path=Volume, Mode=TwoWay}">
+            <Slider.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FB7D00" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlDarkDarkBrushKey}" Color="Black" />
+            </Slider.Resources>
+        </Slider>
     </Grid>
 </Window>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.Windows.Threading;
 
 namespace SoundPlayer
 {
@@ -39,6 +40,7 @@ namespace SoundPlayer
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
+            mediaElement.Position = TimeSpan.Zero;
             mediaElement.Play();
         }
 
@@ -65,19 +67,36 @@ namespace SoundPlayer
             mediaElement.Close();
         }
 
-        private void mediaElement_MediaOpened(object sender, RoutedEventArgs e)
+        private void MediaElement_MediaOpened(object sender, RoutedEventArgs e)
         {
-            //
+            tbState.Text = mediaElement.Source.LocalPath;
+            sliderPosition.Maximum = mediaElement.NaturalDuration.TimeSpan.TotalSeconds;
         }
 
-        private void mediaElement_MediaFailed(object sender, ExceptionRoutedEventArgs e)
+        private void MediaElement_MediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
-            tbState.Text = "Playback error";
+            tbState.Text = e.ErrorException.Message.ToString();
         }
 
-        private void mediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
         {
             tbState.Text = "Playback is complete";
+        }
+
+        private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ((Slider)sender).SelectionEnd = e.NewValue;
+        }
+
+        private void SliderPosition_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            DispatcherTimer timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (object o, EventArgs ev) =>
+            {
+                mediaElement.Pause();
+                mediaElement.Position = TimeSpan.FromSeconds(sliderPosition.Value);
+                mediaElement.Play();
+            }, this.Dispatcher);
+            timer.Start(); 
         }
     }
 }
