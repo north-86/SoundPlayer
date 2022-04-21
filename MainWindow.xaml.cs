@@ -13,18 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using Microsoft.Win32;
 
 namespace SoundPlayer
 {
     public partial class MainWindow : Window
     {
-        ObservableCollection<SoundFile> soundfiles;
+        ObservableCollection<string> soundfiles;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            soundfiles = new ObservableCollection<SoundFile>();
+            soundfiles = new ObservableCollection<string>();
             listBox.ItemsSource = soundfiles; 
         }
         
@@ -44,7 +45,13 @@ namespace SoundPlayer
 
         private void AddFile_Click(object sender, RoutedEventArgs e)
         {
-            //
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Audio Files (*.mp3)|*.mp3";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string soundfile = openFileDialog.FileName;
+                soundfiles.Add(soundfile);
+            }
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
