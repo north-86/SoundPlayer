@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using Microsoft.Win32;
+using System.Windows.Threading;
 
 namespace SoundPlayer
 {
@@ -29,13 +30,6 @@ namespace SoundPlayer
             listBox.ItemsSource = soundfiles; 
         }
         
-        private void Playback_Click(object sender, RoutedEventArgs e)
-        {
-            Playback playback = new Playback();
-            playback.Owner = this;
-            playback.Show();
-        }
-
         private void About_Click(object sender, RoutedEventArgs e)
         {
             About about = new About();
@@ -49,8 +43,9 @@ namespace SoundPlayer
             openFileDialog.Filter = "Audio Files (*.mp3)|*.mp3";
             if (openFileDialog.ShowDialog() == true)
             {
-                string soundfile = openFileDialog.FileName;
+                var soundfile = openFileDialog.FileName;
                 soundfiles.Add(soundfile);
+                mediaElement.Source = new Uri(soundfile, UriKind.Absolute);
             }
         }
 
@@ -64,21 +59,55 @@ namespace SoundPlayer
             Application.Current.MainWindow.WindowState = WindowState.Minimized;
         }
 
-        private void BtnMax_Click(object sender, RoutedEventArgs e)
-        {
-            if (Application.Current.MainWindow.WindowState == WindowState.Maximized)
-            {
-                Application.Current.MainWindow.WindowState = WindowState.Normal;
-            }
-            else
-            {
-                Application.Current.MainWindow.WindowState = WindowState.Maximized;
-            }
-        }
-
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Play_Click(object sender, RoutedEventArgs e)
+        {
+            mediaElement.Play();
+        }
+
+        private void Pause_Click(object sender, RoutedEventArgs e)
+        {
+            if (mediaElement.CanPause)
+            {
+                mediaElement.Pause();
+            }
+        }
+
+        private void Stop_Click(object sender, RoutedEventArgs e)
+        {
+            mediaElement?.Stop();
+        }
+
+        private void MediaElement_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            tbState.Text = mediaElement.Source.LocalPath;
+            sliderPosition.Maximum = mediaElement.NaturalDuration.TimeSpan.TotalSeconds;
+        }
+
+        private void MediaElement_MediaFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+            tbState.Text = e.ErrorException.Message.ToString();
+        }
+
+        private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            tbState.Text = "Playback is complete";
+        }
+
+        private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ((Slider)sender).SelectionEnd = e.NewValue;
+        }
+
+        private void SliderPosition_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            mediaElement.Pause();
+            mediaElement.Position = TimeSpan.FromSeconds(sliderPosition.Value);
+            mediaElement.Play();
         }
     }
 }
