@@ -145,57 +145,52 @@
     </Window.Template>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="62"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="62"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Row="0" Grid.Column="0" MinWidth="60" MinHeight="60" Content="+" FontSize="30" ToolTip="Add file" Click="AddFile_Click"/>
-                <ListBox x:Name="listBox" Grid.Row="0" Grid.Column="1" Background="#1F1F1F" BorderBrush="#FB7D00" BorderThickness="0.5" Foreground="White"/>
+                <ListBox x:Name="listBox" Grid.Row="0" Grid.Column="1" Background="#1F1F1F" BorderBrush="#FB7D00" BorderThickness="0.5" Foreground="White" SelectionChanged="ListBox_SelectionChanged"/>
             </Grid>
         </Border>
         <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Row="1" Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Playback" Style="{StaticResource playbackStyle}"/>
-                <Button x:Name="play" Grid.Row="0" Grid.Column="1" Style="{StaticResource btnPlay}" Click="Play_Click"/>
-                <Button x:Name="pause" Grid.Row="0" Grid.Column="2" Style="{StaticResource btnPause}" Click="Pause_Click"/>
-                <Button x:Name="stop" Grid.Row="0" Grid.Column="3" Style="{StaticResource btnStop}" Click="Stop_Click"/>
-                <TextBlock x:Name="tbState" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource tbStyle}"/>
-                <MediaElement x:Name="mediaElement" Grid.Row="2" Grid.ColumnSpan="4" MediaOpened="MediaElement_MediaOpened" MediaFailed="MediaElement_MediaFailed" MediaEnded="MediaElement_MediaEnded" LoadedBehavior="Manual"/>
-                <TextBlock x:Name="tbPosition" Grid.Row="3" Grid.Column="0" Text="Position" Style="{StaticResource tbStyle}"/>
-                <Slider x:Name="sliderPosition" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" ValueChanged="SliderPosition_ValueChanged" Value="{Binding ElementName=mediaElement, Path=Position, Mode=TwoWay}">
-                    <Slider.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FB7D00"/>
-                    </Slider.Resources>
-                </Slider>
-                <TextBlock x:Name="tbVolume" Grid.Row="4" Grid.Column="0" Text="Volume" Style="{StaticResource tbStyle}"/>
-                <Slider x:Name="sliderVolume" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" ValueChanged="SliderVolume_ValueChanged" Value="{Binding ElementName=mediaElement, Path=Volume, Mode=TwoWay}">
-                    <Slider.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FB7D00"/>
-                    </Slider.Resources>
-                </Slider>
-            </Grid>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Playback" Style="{StaticResource playbackStyle}"/>
+            <Button x:Name="play" Grid.Row="0" Grid.Column="1" Style="{StaticResource btnPlay}" Click="Play_Click"/>
+            <Button x:Name="pause" Grid.Row="0" Grid.Column="2" Style="{StaticResource btnPause}" Click="Pause_Click"/>
+            <Button x:Name="stop" Grid.Row="0" Grid.Column="3" Style="{StaticResource btnStop}" Click="Stop_Click"/>
+            <TextBlock x:Name="tbState" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource tbStyle}"/>
+            <MediaElement x:Name="mediaElement" Grid.Row="2" Grid.ColumnSpan="4" MediaOpened="MediaElement_MediaOpened" MediaFailed="MediaElement_MediaFailed" MediaEnded="MediaElement_MediaEnded" LoadedBehavior="Manual"/>
+            <TextBlock x:Name="tbPosition" Grid.Row="3" Grid.Column="0" Text="Position" Style="{StaticResource tbStyle}"/>
+            <Slider x:Name="sliderPosition" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" ValueChanged="SliderPosition_ValueChanged" Value="{Binding ElementName=mediaElement, Path=Position, Mode=TwoWay}">
+                <Slider.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FB7D00"/>
+                </Slider.Resources>
+            </Slider>
+            <TextBlock x:Name="tbVolume" Grid.Row="4" Grid.Column="0" Text="Volume" Style="{StaticResource tbStyle}"/>
+            <Slider x:Name="sliderVolume" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" ValueChanged="SliderVolume_ValueChanged" Value="{Binding ElementName=mediaElement, Path=Volume, Mode=TwoWay}">
+                <Slider.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FB7D00"/>
+                </Slider.Resources>
+            </Slider>
         </Grid>
         <Button Grid.Row="2" x:Name="btnAbout" Content="About" Click="About_Click"/>
     </Grid>
