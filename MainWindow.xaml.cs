@@ -27,7 +27,7 @@ namespace SoundPlayer
             InitializeComponent();
 
             soundfiles = new ObservableCollection<string>();
-            listBox.ItemsSource = soundfiles; 
+            listBox.ItemsSource = soundfiles;
         }
         
         private void About_Click(object sender, RoutedEventArgs e)
@@ -46,6 +46,15 @@ namespace SoundPlayer
                 var soundfile = openFileDialog.FileName;
                 soundfiles.Add(soundfile);
                 mediaElement.Source = new Uri(soundfile, UriKind.Absolute);
+            }
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var sf = listBox.SelectedItem;
+            if (sf != null)
+            {
+                mediaElement.Source = new Uri(sf.ToString(), UriKind.Absolute);
             }
         }
 
