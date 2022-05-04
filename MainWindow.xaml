@@ -5,37 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoundPlayer"
         mc:Ignorable="d"
-        Title="SoundPlayer" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" AllowsTransparency="False" WindowStyle="None" Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        Title="SoundPlayer" Height="250" MinHeight="250" Width="400" MinWidth="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" AllowsTransparency="False" WindowStyle="None" Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Window.Resources>
         <Style TargetType="{x:Type Button}" x:Key="btnMinWindow">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Margin="5 5 5 10">
-                            <Rectangle Width="25" Height="1" Fill="#FB7D00"/>
+                            <Rectangle Width="20" Height="2" Fill="#FB7D00"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
             <Setter Property="ItemsControl.VerticalAlignment" Value="Bottom"/>
         </Style>
-        <Style TargetType="{x:Type Button}" x:Key="btnMaxWindow">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Margin="5">
-                            <Rectangle Width="25" Height="25" Stroke="#FB7D00" Fill="Transparent"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
         <Style TargetType="{x:Type Button}" x:Key="btnCloseWindow">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Margin="5">
-                            <Ellipse Width="25" Height="25" Fill="#FB7D00"/>
+                            <Ellipse Width="20" Height="20" Fill="#FB7D00"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -55,6 +44,73 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="playbackStyle">
+            <Setter Property="ItemsControl.FontSize" Value="15"/>
+            <Setter Property="ItemsControl.Foreground" Value="#FB7D00"/>
+            <Setter Property="ItemsControl.HorizontalAlignment" Value="Left"/>
+            <Setter Property="ItemsControl.VerticalAlignment" Value="Center"/>
+            <Setter Property="ItemsControl.Margin" Value="5, 0, 0, 0"/>
+        </Style>
+        <Style x:Key="tbStyle">
+            <Setter Property="ItemsControl.Foreground" Value="#FB7D00"/>
+            <Setter Property="ItemsControl.HorizontalAlignment" Value="Left"/>
+            <Setter Property="ItemsControl.VerticalAlignment" Value="Center"/>
+            <Setter Property="ItemsControl.FontSize" Value="11"/>
+            <Setter Property="ItemsControl.Margin" Value="5, 2, 0, 2"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="btnPlay">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderBrush="#FB7D00" BorderThickness="1" CornerRadius="10">
+                            <Grid>
+                                <Rectangle Fill="Black" RadiusX="10" RadiusY="10"/>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Text="Play" Foreground="#FB7D00"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsControl.Margin" Value="5, 5, 5, 5"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="btnPause">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderBrush="#FB7D00" BorderThickness="1" CornerRadius="10">
+                            <Grid>
+                                <Rectangle Fill="Black" RadiusX="10" RadiusY="10"/>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Text="Pause" Foreground="#FB7D00"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsControl.Margin" Value="5, 5, 5, 5"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="btnStop">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderBrush="#FB7D00" BorderThickness="1" CornerRadius="10">
+                            <Grid>
+                                <Rectangle Fill="Black" RadiusX="10" RadiusY="10"/>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Text="Stop" Foreground="#FB7D00"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsControl.Margin" Value="5, 5, 5, 5"/>
+        </Style>
+        <Style TargetType="Slider">
+            <Setter Property="TickPlacement" Value="BottomRight"/>
+            <Setter Property="IsSelectionRangeEnabled" Value="True"/>
+            <Setter Property="SelectionStart" Value="0"/>
+            <Setter Property="Foreground" Value="#FB7D00"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Minimum" Value="0"/>
+        </Style>
     </Window.Resources>
     <Window.Template>
         <ControlTemplate TargetType="Window">
@@ -70,17 +126,15 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Width="30" Height="30" Margin="5">
+                        <Image Grid.Column="0" Width="20" Height="20" Margin="5">
                             <Image.Source>
                                 key.ico
                             </Image.Source>
                         </Image>
-                        <TextBlock Grid.Column="1" Text="{TemplateBinding Title}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0" FontSize="20" Foreground="#FB7D00"/>
+                        <TextBlock Grid.Column="1" Text="{TemplateBinding Title}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0" FontSize="18" Foreground="#FB7D00"/>
                         <Button x:Name="btnMin" Grid.Column="2" ToolTip="Minimize" Style="{StaticResource btnMinWindow}" Click="BtnMin_Click"/>
-                        <Button x:Name="btnMax" Grid.Column="3" ToolTip="Maximize/Restore Down" Style="{StaticResource btnMaxWindow}" Click="BtnMax_Click"/>
-                        <Button x:Name="btnClose" Grid.Column="4" ToolTip="Close" Style="{StaticResource btnCloseWindow}" Click="BtnClose_Click"/>
+                        <Button x:Name="btnClose" Grid.Column="3" ToolTip="Close" Style="{StaticResource btnCloseWindow}" Click="BtnClose_Click"/>
                     </Grid>
                     <Border Grid.Row="1">
                         <ContentPresenter/>
@@ -93,7 +147,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1">
             <Grid>
@@ -102,24 +156,47 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Row="0" Grid.Column="0" MinWidth="60" MinHeight="60" Content="+" FontSize="30" ToolTip="Add file" Click="AddFile_Click"/>
+                <ListBox x:Name="listBox" Grid.Row="0" Grid.Column="1" Background="#1F1F1F" BorderBrush="#FB7D00" BorderThickness="0.5" Foreground="White"/>
             </Grid>
         </Border>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <GridSplitter Grid.Row="1" Grid.Column="1" Width="2" Background="#FB7D00"/>
-            <ListBox x:Name="listBox" Grid.Row="1" Grid.Column="2" Background="#1F1F1F" BorderBrush="Black" BorderThickness="0.5" SelectionMode="Multiple" Foreground="White"/>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Playback" Style="{StaticResource playbackStyle}"/>
+                <Button x:Name="play" Grid.Row="0" Grid.Column="1" Style="{StaticResource btnPlay}" Click="Play_Click"/>
+                <Button x:Name="pause" Grid.Row="0" Grid.Column="2" Style="{StaticResource btnPause}" Click="Pause_Click"/>
+                <Button x:Name="stop" Grid.Row="0" Grid.Column="3" Style="{StaticResource btnStop}" Click="Stop_Click"/>
+                <TextBlock x:Name="tbState" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource tbStyle}"/>
+                <MediaElement x:Name="mediaElement" Grid.Row="2" Grid.ColumnSpan="4" MediaOpened="MediaElement_MediaOpened" MediaFailed="MediaElement_MediaFailed" MediaEnded="MediaElement_MediaEnded" LoadedBehavior="Manual"/>
+                <TextBlock x:Name="tbPosition" Grid.Row="3" Grid.Column="0" Text="Position" Style="{StaticResource tbStyle}"/>
+                <Slider x:Name="sliderPosition" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" ValueChanged="SliderPosition_ValueChanged" Value="{Binding ElementName=mediaElement, Path=Position, Mode=TwoWay}">
+                    <Slider.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FB7D00"/>
+                    </Slider.Resources>
+                </Slider>
+                <TextBlock x:Name="tbVolume" Grid.Row="4" Grid.Column="0" Text="Volume" Style="{StaticResource tbStyle}"/>
+                <Slider x:Name="sliderVolume" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" ValueChanged="SliderVolume_ValueChanged" Value="{Binding ElementName=mediaElement, Path=Volume, Mode=TwoWay}">
+                    <Slider.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FB7D00"/>
+                    </Slider.Resources>
+                </Slider>
+            </Grid>
         </Grid>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*"/>
-                <ColumnDefinition Width="0.5*"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="btnPlayback" Content="Playback" Click="Playback_Click"/>
-            <Button Grid.Column="1" x:Name="btnAbout" Content="About" Click="About_Click"/>
-        </Grid>
+        <Button Grid.Row="2" x:Name="btnAbout" Content="About" Click="About_Click"/>
     </Grid>
 </Window>
